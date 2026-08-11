@@ -159,10 +159,8 @@ def main():
     y_pred_knn = knn.predict(X_test)
     print(f"{r2_score(y_test, y_pred_knn):.4f}")  # slide result: 0.6473
 
-    # ── 10-fold cross-validation ────────────────────────────────────────
-    # Slide results: LinearRegression 0.7304 +- 0.0565,
-    #                RandomForest     0.6461 +- 0.0688,
-    #                KNN              0.5866 +- 0.0620
+    # ── 10-fold cross-validation ──────────────────────────────────────── Slide results: LinearRegression
+    # 0.7304 +- 0.0565, RandomForest 0.6461 +- 0.0688, knn 0.5866 +- 0.0620.
     kf = KFold(n_splits=10)
     models = [
         ("LinearRegression", lr),
