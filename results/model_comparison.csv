@@ -1,0 +1,8 @@
+model,test_r2,test_mae,cv_r2_mean,cv_r2_std
+Mean baseline,-0.0013,0.8409,-0.0055,0.0062
+LinearRegression (2 features),0.7711,0.3648,0.7391,0.0381
+RandomForest (2 features),0.7222,0.3992,0.6789,0.0495
+"KNN, unscaled (2 features)",0.6488,0.4529,0.6178,0.0276
+"KNN, scaled (2 features)",0.7303,0.3971,0.7060,0.0413
+TF-IDF + Ridge (review text),0.7742,0.3704,0.7419,0.0202
+TF-IDF + 2 features + Ridge,0.8591,0.2750,0.8291,0.0259

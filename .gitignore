@@ -28,9 +28,8 @@ dist/
 .coverage
 htmlcov/
 
-# Data files (fetched from the PlanetTerp API at runtime)
-data/
-*.csv
+# Data: the committed snapshot (data/planetterp_snapshot.csv.gz) and results
+# table (results/model_comparison.csv) are tracked on purpose, for reproducibility.
 *.parquet
 
 # Editors / OS
