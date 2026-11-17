@@ -6,7 +6,25 @@ on:
     branches: [ main ]
 
 jobs:
-  test:
+  # The committed table was produced on Apple Silicon; this job must reproduce it byte for byte.
+  reproduce-exact:
+    runs-on: macos-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.13"
+      - run: pip install -r requirements.txt
+      - name: Unit tests (offline, synthetic data)
+        run: python -m pytest -q tests
+      - name: Reproduce the committed results table exactly
+        run: |
+          python -m prof_ratings evaluate
+          git diff --exit-code results/model_comparison.csv
+
+  # On x86-64 the RandomForest row differs in the 4th decimal (cross-architecture floating point),
+  # so Linux checks agreement to the README's 3-decimal precision instead.
+  reproduce-linux:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
@@ -16,7 +34,8 @@ jobs:
       - run: pip install -r requirements.txt
       - name: Unit tests (offline, synthetic data)
         run: python -m pytest -q tests
-      - name: Reproduce the committed results table from the committed snapshot
+      - name: Reproduce the committed results table to 3 decimals
         run: |
+          cp results/model_comparison.csv /tmp/committed.csv
           python -m prof_ratings evaluate
-          git diff --exit-code results/model_comparison.csv
+          python scripts/compare_results.py /tmp/committed.csv results/model_comparison.csv --tol 0.001
