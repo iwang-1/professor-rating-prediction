@@ -1,6 +1,6 @@
 # Professor Rating Prediction
 
-[![Python](https://img.shields.io/badge/python-3-3776AB?logo=python&logoColor=white)](requirements.txt)
+[![CI](https://github.com/iwang-1/professor-rating-prediction/actions/workflows/ci.yml/badge.svg)](https://github.com/iwang-1/professor-rating-prediction/actions/workflows/ci.yml)
 
 Predicting a professor's average star rating on [PlanetTerp](https://planetterp.com/) from the **text of
 their reviews only** — the star ratings are never used as features.
